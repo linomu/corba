@@ -1,0 +1,18 @@
+module sop_corba{
+    interface PacienteCllbckInt{
+        string notificarPaciente(in string mensaje);
+    };
+    struct PacienteDTO{
+        long numHabitacion;
+		string nombres;
+		string apellidos, estrato;
+		long edad;
+		long frecuenciaCardiaca, presionArterial, frecuenciaRespiratoria, saturacionOxigeno, sistolica, diastolica;
+		string temperatura;
+        PacienteCllbckInt pacbck;
+    };
+    interface GestionAlertasInt{
+        void registrarPaciente(in PacienteDTO objPaciente, out boolean resultado);
+		boolean enviarIndicadores(in PacienteDTO objPaciente, out boolean resultado);
+    };
+};
