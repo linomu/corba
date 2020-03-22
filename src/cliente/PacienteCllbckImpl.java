@@ -1,5 +1,6 @@
 package cliente;
 
+import javax.swing.JTextArea;
 import servidorDeAlertas.sop_corba.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,11 +15,22 @@ import servidorDeAlertas.sop_corba.*;
 public class PacienteCllbckImpl extends PacienteCllbckIntPOA {
 
     
+    JTextArea textAreaCallBack;
+    
+    public PacienteCllbckImpl(){
+        super();
+    }
+    
+    public PacienteCllbckImpl(JTextArea textArea) {
+        super();
+        this.textAreaCallBack = textArea;
+    }
 
     @Override
     public String notificarPaciente(String mensaje) {
-        System.out.println("Mensaje");
-        return "Hello";
+         System.out.println("Mensaje enviado del servidor: " + mensaje);
+        this.textAreaCallBack.setText("Call back: " +mensaje);
+        return "Mensaje Retornado";
     }
     
 }

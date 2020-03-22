@@ -6,6 +6,11 @@ import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
 import org.omg.PortableServer.POA;
 import servidorDeNotificaciones.servidor.UtilidadesConsola;
+import ServidorNotificaciones.vistas.VistaNotificaciones;
+import java.awt.Component;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import servidorNotificaciones.sop_corba.*;
 
@@ -13,6 +18,15 @@ public class ServidorDeObjetos {
 
   public static void main(String args[]) {
     try{
+        
+        
+        
+        VistaNotificaciones miVista = new VistaNotificaciones();
+        miVista.setVisible(true);
+        
+        
+        
+        
         String[] vec = new String[4];
         vec[0] = "-ORBInitialPort";
         System.out.println("Ingrese la dirección IP donde escucha el n_s");
@@ -34,7 +48,7 @@ public class ServidorDeObjetos {
 
                
         System.out.println("4. Crea el objeto servant");
-        GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl();   
+        GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl(miVista);
         
         System.out.println("5. Crea el objeto tie y se registra una referencia al objeto servant mediante el contructor");
         GestionNotificacionesPOATie objTIE= new GestionNotificacionesPOATie(ObjServant);
@@ -59,6 +73,8 @@ public class ServidorDeObjetos {
 
         System.out.println("El Servidor esta listo y esperando ...");
         orb.run();
+        
+        
     } 
 	
       catch (Exception e) {

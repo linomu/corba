@@ -69,7 +69,7 @@ public class ClienteDeObjetos {
                         
                         numHabitacion = Integer.parseInt(UtilidadesConsola.leerCadena());
                         
-                        PacienteDTO objPaciente = new PacienteDTO(numHabitacion, nombre, apellido, "1", edad, 75, 75, 75, 75, 75, 75, apellido, href1);
+                        PacienteDTO objPaciente = new PacienteDTO(numHabitacion, nombre, apellido, edad, 75, 75, 75, 75, 75, 75, 75, href1);
                         
                        BooleanHolder resultado = new BooleanHolder();
                        ref.registrarPaciente(objPaciente, resultado);

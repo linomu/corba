@@ -3,8 +3,8 @@ module sop_corba {
     interface GestionNotificaciones{
         struct ClsMensajeNotificacionDTO{
 	    	long numeroHabitacion;
-     		long edad;
-     		string nombres, apellidos, estrato, mensajeAlMedico;
+     		float edad;
+     		string nombres, apellidos, mensajeAlMedico;
      		string fecha, hora;
 	};
 	void notificarAlMedico(in ClsMensajeNotificacionDTO objNotificacion);

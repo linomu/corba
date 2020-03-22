@@ -5,10 +5,10 @@ module sop_corba{
     struct PacienteDTO{
         long numHabitacion;
 		string nombres;
-		string apellidos, estrato;
-		long edad;
-		long frecuenciaCardiaca, presionArterial, frecuenciaRespiratoria, saturacionOxigeno, sistolica, diastolica;
-		string temperatura;
+		string apellidos;
+		float edad;
+		float frecuenciaCardiaca, presionArterial, frecuenciaRespiratoria, saturacionOxigeno, sistolica, diastolica;
+		float temperatura;
         PacienteCllbckInt pacbck;
     };
     interface GestionAlertasInt{
