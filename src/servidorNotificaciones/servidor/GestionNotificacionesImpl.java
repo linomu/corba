@@ -5,6 +5,7 @@
  */
 package servidorNotificaciones.servidor;
 import ServidorNotificaciones.dto.ClsIndicadoresAlerta;
+import ServidorNotificaciones.dto.ClsIndicadoresRegistros;
 import ServidorNotificaciones.dto.ClsNotificacionDTO;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import servidorNotificaciones.sop_corba.GestionNotificacionesPOA;
 import servidorNotificaciones.sop_corba.GestionNotificacionesPackage.ClsMensajeNotificacionDTO;
 import ServidorNotificaciones.vistas.VistaNotificaciones;
+import java.util.ArrayList;
 
 /**
  *
@@ -77,11 +79,14 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
     public void notificarAlMedico(ClsMensajeNotificacionDTO objNotificacion) {
         System.out.println("***Datos Servidor Notificaiones***\nNombre: " + objNotificacion.nombres);
         System.out.println("Cantidad de alertas: " + objNotificacion.getListaIndicadoresAlerta().size());
-        //this.objNotificacion = objNotificacion;
-        
-        
-        
-        
+       
+        ArrayList<ClsIndicadoresAlerta> listaIndicadoresAlerta = null;
+        //SE haga la consulta a la base de datos y se recuperen
+        objNotificacion.setListaIndicadoresAlerta(listaIndicadoresAlerta);
+       
+        ArrayList<ClsIndicadoresRegistros> listaIndicadoresRegistros = null;
+        //Consulas la bd
+        objNotificacion.setListaIndicadoresRegistros(listaIndicadoresRegistros);
         
         imprimirInformacion(objNotificacion);
     }

@@ -40,8 +40,11 @@ public class VistaNotificaciones extends javax.swing.JFrame {
 
   
     public VistaNotificaciones() {
+        //funcionalidadCorba();
         
-        initComponents();
+       initComponents();
+        
+        
         
         
         
@@ -329,7 +332,9 @@ public class VistaNotificaciones extends javax.swing.JFrame {
                
         System.out.println("4. Crea el objeto servant");
         
-       GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl(this.txtEstrato, this.txtNumHabitacion, this.txtNombres, this.txtApellidos, this.txtEdad, this.txtHoraAlerta, this.txtFechaAlerta, this.txtMensajeEnfermeraDoctor, this.tableIndicadores, this.tableRegistros);
+        //initComponents();
+        
+        GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl(this.txtEstrato, this.txtNumHabitacion, this.txtNombres, this.txtApellidos, this.txtEdad, this.txtHoraAlerta, this.txtFechaAlerta, this.txtMensajeEnfermeraDoctor, this.tableIndicadores, this.tableRegistros);
        //GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl();   
         
         System.out.println("5. Crea el objeto tie y se registra una referencia al objeto servant mediante el contructor");
