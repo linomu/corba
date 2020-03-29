@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class ClienteDeObjetos1 extends javax.swing.JFrame {
 
     private final ConexionBD conexionABaseDeDatos;
+    private static boolean hayPaciente;
     static PacienteCllbckInt href1;
     static GestionAlertasInt ref;
     //private ArrayList<String> mensajesTextArea = new ArrayList<>();
@@ -245,11 +246,9 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                                 .addComponent(btnBuscarCRUD)
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel1))
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -266,12 +265,12 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardarCRUD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnModificarCRUD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGoLectura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGoLectura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -350,8 +349,10 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                    txtNombre.setText(res.getString("nombresPaciente"));
                    txtApellido.setText(res.getString("apellidosPaciente"));
                    ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNac"));
+                   hayPaciente = true;
                }else{
                    JOptionPane.showMessageDialog(null, "No se encuenta el paciente.");
+                   hayPaciente = false;
                    limpiarCajas();
                }
                sentencia.close();
@@ -424,10 +425,14 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEliminarActionPerformed
 
     private void btnGoLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLecturaActionPerformed
-        Paciente paciente = capturarPaciente();
-        ClienteDeObjetos2 lectura = new ClienteDeObjetos2(paciente);
-        this.setVisible(false);
-        lectura.setVisible(true);
+        if(hayPaciente){
+            Paciente paciente = capturarPaciente();
+            ClienteDeObjetos2 lectura = new ClienteDeObjetos2(paciente);
+            this.setVisible(false);
+            lectura.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "No has seleccionado/buscado un paciente. Por favor busca un paciente para seleccionarlo.");
+        }
     }//GEN-LAST:event_btnGoLecturaActionPerformed
 
     public static void main(String args[]) {
