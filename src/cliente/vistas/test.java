@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class test {
     public static void main(String[] args){
-        /*
+        
         String fechaNacimiento = "08/12/2021";
         String[] fechaIngresada = fechaNacimiento.split("/");
         int dia = Integer.parseInt(fechaIngresada[0]);
@@ -37,22 +37,12 @@ public class test {
         
         System.out.println(edad);  
         
-        if (validarAnio("08/12/2020")) {
+        if (validarAnio("08/12/2021")) {
             System.out.println("Valido");
-        }*/
+        }else{
+            System.out.println("Inválido");
+        }
         
-        
-        
-        
-        
-        Date now = new Date();
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-        String mysqlDateString = formatter.format(now);
-        String mysqlDate = formatter.format(now);
-        String dateNow = formatter.format(now);
-        System.out.println("Java's Default Date Format: " + dateNow);
-        System.out.println("Mysql's Default Date Format: " + mysqlDateString);
     }
     
     

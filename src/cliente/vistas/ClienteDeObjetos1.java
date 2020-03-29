@@ -372,21 +372,26 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGuardarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCRUDActionPerformed
+        
         conexionABaseDeDatos.conectar();
         int resultado=-1;
-        try {
-            PreparedStatement sentencia = null;
-            String consulta = "insert into paciente(numHabitacion, nombresPaciente, apellidosPaciente, fechaNacimiento) values(?,?,?,?)";
-            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
-            sentencia.setString(1, txtNumHabitacion.getText());
-            sentencia.setString(2, txtNombre.getText());
-            sentencia.setString(3, txtApellido.getText());
-            sentencia.setString(4, ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText());
-            resultado = sentencia.executeUpdate(); 
-            sentencia.close();
-            conexionABaseDeDatos.desconectar();
-        } catch (SQLException e) {
-                  System.out.println("error en la inserción: "+e.getMessage());         
+        if (validarFormulario()) {
+            try {
+                JOptionPane.showMessageDialog(null, "Entré");
+                PreparedStatement sentencia = null;
+                String consulta = "insert into paciente(numHabitacion, nombresPaciente, apellidosPaciente, fechaNacimiento) values(?,?,?,?)";
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+                sentencia.setString(1, txtNumHabitacion.getText());
+                sentencia.setString(2, txtNombre.getText());
+                sentencia.setString(3, txtApellido.getText());
+                sentencia.setString(4, ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText());
+                resultado = sentencia.executeUpdate(); 
+                sentencia.close();
+                conexionABaseDeDatos.desconectar();
+                limpiarCajas();
+            } catch (SQLException e) {
+                      System.out.println("error en la inserción: "+e.getMessage());         
+            }
         }
        
     }//GEN-LAST:event_btnGuardarCRUDActionPerformed
@@ -528,17 +533,17 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }
     
     private int calcularEdad(String fechaNacimiento){
-        String[] fechaIngresada = fechaNacimiento.split("/");
-        int dia = Integer.parseInt(fechaIngresada[0]);
+        String[] fechaIngresada = fechaNacimiento.split("-");
+        int dia = Integer.parseInt(fechaIngresada[2]);
         int mes = Integer.parseInt(fechaIngresada[1]);
-        int anio = Integer.parseInt(fechaIngresada[2]);
+        int anio = Integer.parseInt(fechaIngresada[0]);
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
         LocalDateTime now = LocalDateTime.now();  
-        String[] fechaActual = dtf.format(now).toString().split("/");
-        int diaActual = Integer.parseInt(fechaActual[0]);
+        String[] fechaActual = dtf.format(now).toString().split("-");
+        int diaActual = Integer.parseInt(fechaActual[2]);
         int mesActual = Integer.parseInt(fechaActual[1]);
-        int anioActual = Integer.parseInt(fechaActual[2]);
+        int anioActual = Integer.parseInt(fechaActual[0]);
         
         int edad = (anioActual - anio);
         if (mesActual - mes <= 0) {
@@ -548,12 +553,12 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }
     
     public boolean validarAnio(String fecha){
-        String[] fechaIngresada = fecha.split("/");
-        int anio = Integer.parseInt(fechaIngresada[2]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        String[] fechaIngresada = fecha.split("-");
+        int anio = Integer.parseInt(fechaIngresada[0]);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
         LocalDateTime now = LocalDateTime.now();  
-        String[] fechaActual = dtf.format(now).toString().split("/");
-        int anioActual = Integer.parseInt(fechaActual[2]);
+        String[] fechaActual = dtf.format(now).toString().split("-");
+        int anioActual = Integer.parseInt(fechaActual[0]);
         
         return anioActual>anio;
     }
