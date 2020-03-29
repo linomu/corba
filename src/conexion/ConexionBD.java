@@ -35,7 +35,6 @@ public class ConexionBD {
            //crea una instancia de la controlador de la base de datos
             objConexionBaseDatos = DriverManager.getConnection(url,login,password);
             // gnera una conexión con la base de datos
-            JOptionPane.showMessageDialog(null, "Conectado");
              bandera=1;
         }
         catch(SQLException e){
