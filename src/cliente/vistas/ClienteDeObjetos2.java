@@ -1,5 +1,6 @@
 package cliente.vistas;
 
+import Paciente.Paciente;
 import ServidorDeAlertas.dao.ClsPersistencia;
 import cliente.PacienteCllbckImpl;
 import org.omg.CosNaming.*;
@@ -41,14 +42,23 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
     static GestionAlertasInt ref;
     private ArrayList<String> mensajesTextArea = new ArrayList<>();
     private ArrayList<Integer> numeroHabitaciones = new ArrayList<>();
+    private Paciente paciente = new Paciente();
 
     public ClienteDeObjetos2() {
         initComponents();
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         funcionalidadCorba();
-        inhabilidarTextFecha();
         fijarImagenesEnElFormulario();
         conexionABaseDeDatos= new ConexionBD();
+    }
+    
+    public ClienteDeObjetos2(Paciente parPaciente){
+        initComponents();
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        funcionalidadCorba();
+        fijarImagenesEnElFormulario();
+        conexionABaseDeDatos= new ConexionBD();
+        this.paciente = parPaciente;
     }
 
     /**
@@ -70,11 +80,15 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAreaCallback = new javax.swing.JTextArea();
+        btnGoGestion = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtLNombre = new javax.swing.JTextField();
+        txtLNumHabitacion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnGuardar.setText("Guardar y enviar indicadores");
+        btnGuardar.setText("Comenzar Lectura");
         btnGuardar.setName("btnGuardarCliente"); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +96,7 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setText("Indicadores");
 
         txtarea_indicadores.setColumns(20);
@@ -90,10 +104,9 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
         txtarea_indicadores.setName("txtIndicadores"); // NOI18N
         jScrollPane1.setViewportView(txtarea_indicadores);
 
-        jLabel6.setFont(new java.awt.Font("Matura MT Script Capitals", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setText("Notificaciones");
 
-        btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +118,23 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
         txtAreaCallback.setRows(5);
         jScrollPane3.setViewportView(txtAreaCallback);
 
+        btnGoGestion.setText("Atrás");
+        btnGoGestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoGestionActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel1.setText("Paciente: ");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel2.setText("Num Habitación:");
+
+        txtLNombre.setEnabled(false);
+
+        txtLNumHabitacion.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,46 +144,66 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
+                        .addGap(18, 18, 18)
                         .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGoGestion))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnSalir))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtLNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtLNombre)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel5))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtLNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addComponent(jLabel6)
                         .addGap(11, 11, 11)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar)
-                            .addComponent(btnSalir))
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel5)
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGoGestion)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         pack();
@@ -161,49 +211,48 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         //Capturar Informacion
+        int numHabitacion = paciente.getNumHabitacion();
+        String nombre = paciente.getNombres();
+        String apellido = paciente.getApellidos();
+        String fechaNac = paciente.getFechaNac();
+        int edad = calcularEdad(fechaNac);
+        //ClsPersistencia objPersistencia = new ClsPersistencia();
+        //this.numeroHabitaciones = objPersistencia.LeerNumerosHabitacion();
+        if (!this.numeroHabitaciones.contains(numHabitacion)) {
+            JOptionPane.showMessageDialog(this, "Iniciando la lectura de sensores...");
+            //Capturamos la edad 
+           //Creamos un objeto paciente
+            PacienteDTO objPaciente = new PacienteDTO(numHabitacion, nombre, apellido, edad, href1);
+            //Deshabilitamos los demás componentes de la GUI para envitar el ingreso de datos
+            inhabilitarComponentes();
+            //Objeto de la clase Timer, el cual me permite realizar una actividad cada N Milisegundos
+            Timer objTimer = new Timer(8000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
 
-        //Validar que todos los campos tengan información
-        if (validarFormulario()) {
-            //ClsPersistencia objPersistencia = new ClsPersistencia();
-            //this.numeroHabitaciones = objPersistencia.LeerNumerosHabitacion();
-            if (!this.numeroHabitaciones.contains(numHabitacion)) {
-                JOptionPane.showMessageDialog(this, "Iniciando la lectura de sensores...");
-                //Capturamos la edad 
-               //Creamos un objeto paciente
-                PacienteDTO objPaciente = new PacienteDTO(numHabitacion, nombre, apellido, edad, href1);
-                //Deshabilitamos los demás componentes de la GUI para envitar el ingreso de datos
-                inhabilitarComponentes();
-                //Objeto de la clase Timer, el cual me permite realizar una actividad cada N Milisegundos
-                Timer objTimer = new Timer(8000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
+                    //Generar los indicadores aleatoriamente
+                    GestionIndicadores objGestion = new GestionIndicadores();
+                    PacienteDTO objNewCliente;
+                    //El objNewCliente es el resultado de la informacion personas + los indicadores
+                    objNewCliente = objGestion.GenerarIndicadores(objPaciente);
+                    // Obtener indicadores en un String para luego imprimirlos
+                    String mensajeTextArea = mensajeIndicadores(objNewCliente);
+                    //Agrego los indicadores a una lista, para tener un historial de indicadores emitidos
+                    mensajesTextArea.add(mensajeTextArea);
+                    //Fijar los mensajes en el area de Indicadores
+                    mostrarIndicadoresEnPantalla();
+                    //Ejecucion de los Objetos Remotos
 
-                        //Generar los indicadores aleatoriamente
-                        GestionIndicadores objGestion = new GestionIndicadores();
-                        PacienteDTO objNewCliente;
-                        //El objNewCliente es el resultado de la informacion personas + los indicadores
-                        objNewCliente = objGestion.GenerarIndicadores(objPaciente);
-                        // Obtener indicadores en un String para luego imprimirlos
-                        String mensajeTextArea = mensajeIndicadores(objNewCliente);
-                        //Agrego los indicadores a una lista, para tener un historial de indicadores emitidos
-                        mensajesTextArea.add(mensajeTextArea);
-                        //Fijar los mensajes en el area de Indicadores
-                        mostrarIndicadoresEnPantalla();
-                        //Ejecucion de los Objetos Remotos
-                        
-                        BooleanHolder resultado = new BooleanHolder();
-                        ref.registrarPaciente(objNewCliente, resultado);
-                        
-                        ref.enviarIndicadores(objNewCliente, resultado);
+                    BooleanHolder resultado = new BooleanHolder();
+                    ref.registrarPaciente(objNewCliente, resultado);
 
-                    }
-                });
-                objTimer.start();
-            } else {
-                JOptionPane.showMessageDialog(this, "El número de habitación ya se encuentra registrado...");
-            }
+                    ref.enviarIndicadores(objNewCliente, resultado);
+
+                }
+            });
+            objTimer.start();
         } else {
-            //JOptionPane.showMessageDialog(this, "El formulario se encuentra incompleto...");
+            JOptionPane.showMessageDialog(this, "El número de habitación ya se encuentra registrado...");
         }
 
 
@@ -235,6 +284,12 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
         this.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnGoGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoGestionActionPerformed
+        ClienteDeObjetos1 gestion = new ClienteDeObjetos1();
+        this.setVisible(false);
+        gestion.setVisible(true);
+    }//GEN-LAST:event_btnGoGestionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -311,24 +366,31 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGoGestion;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel imagenEPS;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel logocorazon;
     private javax.swing.JTextArea txtAreaCallback;
+    private javax.swing.JTextField txtLNombre;
+    private javax.swing.JTextField txtLNumHabitacion;
     private javax.swing.JTextArea txtarea_indicadores;
     // End of variables declaration//GEN-END:variables
 
     private void inhabilitarComponentes() {
+        /*
         this.txtNumHabitacion.setEnabled(false);
         this.txtNombre.setEnabled(false);
         this.txtApellido.setEnabled(false);
         this.jdFecha.setEnabled(false);
         this.btnGuardar.setEnabled(false);
+        */
     }
 
     private void fijarImagenesEnElFormulario() {
@@ -336,31 +398,6 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
         this.imagenEPS.setIcon(new ImageIcon(img));
         Image img2 = new ImageIcon(this.getClass().getResource("img/corazon.png")).getImage();
         this.logocorazon.setIcon(new ImageIcon(img2));
-    }
-
-    private boolean validarFormulario() {
-        boolean formularioCorrecto=true;
-        if((((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText().isEmpty() || this.txtNombre.getText().equals("") || this.txtApellido.getText().equals(""))){
-            formularioCorrecto  = false;
-            JOptionPane.showMessageDialog(this, "El formulario se encuentra incompleto.");
-        }
-        else if (!validarAnio(((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText())) {
-            formularioCorrecto  = false;
-            JOptionPane.showMessageDialog(this, "El anio ingresado no puede ser igual o mayor al anio actual");
-        }
-        else if (!validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
-            formularioCorrecto  = false;
-            JOptionPane.showMessageDialog(this, "El num de habitacion debe estar entre 100 y 999.");
-        }
-        else{
-            try {
-                int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
-            } catch (NumberFormatException e) { 
-                JOptionPane.showMessageDialog(this, "La habitación debe ser un número entre 100 y 999");
-                formularioCorrecto = false;
-            }
-        }
-        return formularioCorrecto;
     }
     
     private int calcularEdad(String fechaNacimiento){
@@ -381,36 +418,5 @@ public class ClienteDeObjetos2 extends javax.swing.JFrame {
             edad--;
         }
         return edad;
-    }
-    
-    public boolean validarAnio(String fecha){
-        String[] fechaIngresada = fecha.split("-");
-        int anio = Integer.parseInt(fechaIngresada[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-        LocalDateTime now = LocalDateTime.now();  
-        String[] fechaActual = dtf.format(now).toString().split("-");
-        int anioActual = Integer.parseInt(fechaActual[0]);
-        
-        return anioActual>anio;
-    }
-    
-    public boolean validarNumHabitacion(int num){
-        boolean valido = false;
-        if (num >= 100 && num <= 999) {
-            valido = true;
-        }
-        return valido;
-    }
-    
-    public void inhabilidarTextFecha(){
-        jdFecha.setEnabled(false);
-        jdFecha.getCalendarButton().setEnabled(true);
-    }
-    
-    public void limpiarCajas(){
-        txtNumHabitacion.setText(null);
-        txtNombre.setText(null);
-        txtApellido.setText(null);
-        ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(null);
     }
 }

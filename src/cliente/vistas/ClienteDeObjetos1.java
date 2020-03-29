@@ -1,23 +1,14 @@
 package cliente.vistas;
 
-import ServidorDeAlertas.dao.ClsPersistencia;
-import cliente.PacienteCllbckImpl;
-import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
+import Paciente.Paciente;
 import org.omg.CORBA.*;
-import org.omg.PortableServer.POA;
-import org.omg.PortableServer.POAHelper;
 
 import servidorDeAlertas.sop_corba.*;
 
 
-import cliente.dto.*;
 import conexion.ConexionBD;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.sql.Date;
+import java.lang.Object;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,27 +16,24 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 public class ClienteDeObjetos1 extends javax.swing.JFrame {
 
     private final ConexionBD conexionABaseDeDatos;
     static PacienteCllbckInt href1;
     static GestionAlertasInt ref;
-    private ArrayList<String> mensajesTextArea = new ArrayList<>();
-    private ArrayList<Integer> numeroHabitaciones = new ArrayList<>();
+    //private ArrayList<String> mensajesTextArea = new ArrayList<>();
+    //private ArrayList<Integer> numeroHabitaciones = new ArrayList<>();
 
     public ClienteDeObjetos1() {
         initComponents();
+        //llenarTabla();
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
-        funcionalidadCorba();
+        //funcionalidadCorba();
         inhabilidarTextFecha();
         fijarImagenesEnElFormulario();
         txtId.setVisible(false);
@@ -80,7 +68,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         txtEliminar = new javax.swing.JButton();
         btnGoLectura = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblPacientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,7 +91,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
 
         txtApellido.setName("txtApellido"); // NOI18N
 
-        btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,18 +145,30 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblPacientes.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
+        tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Num Habitacion", "Nombres", "Apellidos", "Fecha de nacimiento"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblPacientes);
+        if (tblPacientes.getColumnModel().getColumnCount() > 0) {
+            tblPacientes.getColumnModel().getColumn(0).setResizable(false);
+            tblPacientes.getColumnModel().getColumn(1).setResizable(false);
+            tblPacientes.getColumnModel().getColumn(2).setResizable(false);
+            tblPacientes.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,8 +263,8 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(btnGuardarCRUD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -292,16 +292,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 + "\nSaturación de Oxígento: " + df.format(objNewCliente.saturacionOxigeno) + "\n"
                 + "************\n";
         return mensaje;
-    }
-
-    
-
-    public void mostrarIndicadoresEnPantalla() {
-        String mensajeFinal = "";
-        for (String string : mensajesTextArea) {
-            mensajeFinal += string;
-        }
-        this.txtarea_indicadores.setText(mensajeFinal);
     }
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -434,7 +424,10 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEliminarActionPerformed
 
     private void btnGoLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLecturaActionPerformed
-        // TODO add your handling code here:
+        Paciente paciente = capturarPaciente();
+        ClienteDeObjetos2 lectura = new ClienteDeObjetos2(paciente);
+        this.setVisible(false);
+        lectura.setVisible(true);
     }//GEN-LAST:event_btnGoLecturaActionPerformed
 
     public static void main(String args[]) {
@@ -470,45 +463,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         });
     }
 
-    private void funcionalidadCorba() {
-
-        try {
-            String[] vec = new String[4];
-            vec[0] = "-ORBInitialPort";
-            vec[1] = "localhost";
-            vec[2] = "-ORBInitialPort";
-            vec[3] = "2020";
-
-            // crea e inicia el ORB
-            ORB orb = ORB.init(vec, null);
-
-            // obtiene la base del naming context
-            org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
-           
-            
-            NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-            
-            POA rootPOA = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-            rootPOA.the_POAManager().activate();
-            
-            //Instancia el servant
-            PacienteCllbckImpl pacback = new PacienteCllbckImpl(txtAreaCallback);
-            //Obtiene las referencias del rootPOA y acttive el POAManager
-            org.omg.CORBA.Object ref1 = rootPOA.servant_to_reference(pacback);
-            href1 = PacienteCllbckIntHelper.narrow(ref1);
-            
-
-            
-            // *** Resuelve la referencia del objeto en el N_S ***
-            String name = "ges-alertas";
-            ref = GestionAlertasIntHelper.narrow(ncRef.resolve_str(name));
-
-            System.out.println("Obtenido el manejador sobre el servidor de objetos: " + ref);
-        } catch (Exception e) {
-            System.err.println("Error al momento de iniciarlizar Corba: "+e.getMessage());
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCRUD;
     private javax.swing.JButton btnGoLectura;
@@ -522,9 +476,9 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JLabel logocorazon;
+    private javax.swing.JTable tblPacientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JButton txtEliminar;
     private javax.swing.JTextField txtId;
@@ -537,7 +491,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         this.txtNombre.setEnabled(false);
         this.txtApellido.setEnabled(false);
         this.jdFecha.setEnabled(false);
-        this.btnGuardar.setEnabled(false);
     }
 
     private void fijarImagenesEnElFormulario() {
@@ -572,26 +525,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         return formularioCorrecto;
     }
     
-    private int calcularEdad(String fechaNacimiento){
-        String[] fechaIngresada = fechaNacimiento.split("-");
-        int dia = Integer.parseInt(fechaIngresada[2]);
-        int mes = Integer.parseInt(fechaIngresada[1]);
-        int anio = Integer.parseInt(fechaIngresada[0]);
-        
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-        LocalDateTime now = LocalDateTime.now();  
-        String[] fechaActual = dtf.format(now).toString().split("-");
-        int diaActual = Integer.parseInt(fechaActual[2]);
-        int mesActual = Integer.parseInt(fechaActual[1]);
-        int anioActual = Integer.parseInt(fechaActual[0]);
-        
-        int edad = (anioActual - anio);
-        if (mesActual - mes <= 0) {
-            edad--;
-        }
-        return edad;
-    }
-    
     public boolean validarAnio(String fecha){
         String[] fechaIngresada = fecha.split("-");
         int anio = Integer.parseInt(fechaIngresada[0]);
@@ -621,5 +554,57 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         txtNombre.setText(null);
         txtApellido.setText(null);
         ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(null);
+    }
+    
+    public ArrayList<Paciente> listaPacientes(){
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        
+        conexionABaseDeDatos.conectar();        
+        try {            
+            PreparedStatement sentencia = null;
+            String consulta = "select * from paciente";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            ResultSet res = sentencia.executeQuery();
+            DefaultTableModel tm  = (DefaultTableModel)tblPacientes.getModel();
+            Paciente objPaciente;
+            //tm.setRowCount(0);
+            while(res.next()){
+                objPaciente = new Paciente(res.getInt("numHabitacion"), res.getString("nombresPaciente"), res.getString("apellidosPaciente"), res.getString("fechaNac"));
+                pacientes.add(objPaciente);
+                
+                
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+
+        } catch (SQLException e) {
+                  System.out.println("error en la inserción: "+e.getMessage());         
+        }
+        
+        return pacientes;
+    }
+    
+    public void llenarTabla(){
+        ArrayList<Paciente> pacientes = listaPacientes();
+        DefaultTableModel model = (DefaultTableModel)tblPacientes.getModel();
+        java.lang.Object[] row = new java.lang.Object[4];
+        for (int i = 0; i < pacientes.size(); i++) {
+            row[0] = pacientes.get(i).getNumHabitacion();
+            row[1] = pacientes.get(i).getNombres();
+            row[2] = pacientes.get(i).getApellidos();
+            row[3] = pacientes.get(i).getFechaNac();
+            model.addRow(row);
+        }
+    }
+    
+    public Paciente capturarPaciente(){
+        int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
+        String nombres = txtNombre.getText();
+        String apellidos = txtApellido.getText();
+        String fechaNac = ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText();
+        
+        Paciente paciente = new Paciente(numHabitacion, nombres, apellidos, fechaNac);
+        
+        return paciente;
     }
 }
