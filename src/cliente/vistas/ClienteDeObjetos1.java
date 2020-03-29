@@ -68,16 +68,9 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtNumHabitacion = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtarea_indicadores = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
         imagenEPS = new javax.swing.JLabel();
         logocorazon = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtAreaCallback = new javax.swing.JTextArea();
         txtId = new javax.swing.JTextField();
         btnBuscarCRUD = new javax.swing.JButton();
         btnGuardarCRUD = new javax.swing.JButton();
@@ -85,21 +78,19 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         jdFecha = new com.toedter.calendar.JDateChooser();
         btnLimpiar = new javax.swing.JButton();
         txtEliminar = new javax.swing.JButton();
+        btnGoLectura = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 234, -1, -1));
 
         jLabel2.setText("Apellidos:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 271, -1, -1));
 
         jLabel3.setText("Fecha de nacimiento:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 308, -1, -1));
 
         jLabel4.setText("Num. Habitación:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 188, -1, -1));
 
         txtNombre.setName("txtNombre"); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -107,40 +98,10 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 232, 233, -1));
 
         txtNumHabitacion.setName("txtNumHabitacion"); // NOI18N
-        getContentPane().add(txtNumHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 186, 59, -1));
 
         txtApellido.setName("txtApellido"); // NOI18N
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 269, 233, -1));
-
-        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnGuardar.setText("Guardar y enviar indicadores");
-        btnGuardar.setName("btnGuardarCliente"); // NOI18N
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 122, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 24)); // NOI18N
-        jLabel5.setText("Indicadores");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 62, -1, -1));
-
-        txtarea_indicadores.setColumns(20);
-        txtarea_indicadores.setRows(5);
-        txtarea_indicadores.setName("txtIndicadores"); // NOI18N
-        jScrollPane1.setViewportView(txtarea_indicadores);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 183, 398, 127));
-
-        jLabel6.setFont(new java.awt.Font("Matura MT Script Capitals", 1, 24)); // NOI18N
-        jLabel6.setText("Notificaciones");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 322, 214, -1));
-        getContentPane().add(imagenEPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 31, 196, 120));
-        getContentPane().add(logocorazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 50, 117, 97));
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSalir.setText("Salir");
@@ -149,16 +110,8 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 12, -1, -1));
-
-        txtAreaCallback.setColumns(20);
-        txtAreaCallback.setRows(5);
-        jScrollPane3.setViewportView(txtAreaCallback);
-
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 361, 375, 116));
 
         txtId.setEnabled(false);
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 186, 56, -1));
 
         btnBuscarCRUD.setText("Buscar");
         btnBuscarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +119,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnBuscarCRUDActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 183, -1, -1));
 
         btnGuardarCRUD.setText("Guardar");
         btnGuardarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +126,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnGuardarCRUDActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 390, -1, -1));
 
         btnModificarCRUD.setText("Modificar");
         btnModificarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -182,10 +133,8 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnModificarCRUDActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 390, -1, -1));
 
         jdFecha.setDateFormatString("yyyy-MM-dd");
-        getContentPane().add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 304, 165, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +142,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, -1, -1));
 
         txtEliminar.setText("Eliminar");
         txtEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +149,131 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 txtEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
+
+        btnGoLectura.setText("Tomar lectura de los sensores");
+        btnGoLectura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoLecturaActionPerformed(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardarCRUD)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificarCRUD)
+                                .addGap(7, 7, 7)
+                                .addComponent(txtEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLimpiar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(71, 71, 71)
+                                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(84, 84, 84)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscarCRUD))
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGoLectura)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnBuscarCRUD)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel1))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel2))
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btnGuardarCRUD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModificarCRUD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEliminar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGoLectura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -209,71 +281,6 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //Capturar Informacion
-
-        //Validar que todos los campos tengan información
-        if (validarFormulario()) {
-            String nombre = txtNombre.getText();
-            String apellido = txtApellido.getText();
-            //String tipoMensaje = comboTipoEdad.getSelectedItem().toString();
-            String fechaNac = ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText();
-            int edad = calcularEdad(fechaNac);
-            //float edad = Float.parseFloat(txtEdad.getText());
-            int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
-            /*
-            if (tipoMensaje.equals("Semanas")) {
-                //Esta conversion nos permite pasar el numero de semanas a años
-                edad = (float) (edad * (7.0 / 365.0));
-                System.out.println("Entre a semanas: " + edad);
-
-            }
-            */
-            //ClsPersistencia objPersistencia = new ClsPersistencia();
-            //this.numeroHabitaciones = objPersistencia.LeerNumerosHabitacion();
-            if (!this.numeroHabitaciones.contains(numHabitacion)) {
-                JOptionPane.showMessageDialog(this, "Iniciando la lectura de sensores...");
-                //Capturamos la edad 
-               //Creamos un objeto paciente
-                PacienteDTO objPaciente = new PacienteDTO(numHabitacion, nombre, apellido, edad, href1);
-                //Deshabilitamos los demás componentes de la GUI para envitar el ingreso de datos
-                inhabilitarComponentes();
-                //Objeto de la clase Timer, el cual me permite realizar una actividad cada N Milisegundos
-                Timer objTimer = new Timer(8000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-
-                        //Generar los indicadores aleatoriamente
-                        GestionIndicadores objGestion = new GestionIndicadores();
-                        PacienteDTO objNewCliente;
-                        //El objNewCliente es el resultado de la informacion personas + los indicadores
-                        objNewCliente = objGestion.GenerarIndicadores(objPaciente);
-                        // Obtener indicadores en un String para luego imprimirlos
-                        String mensajeTextArea = mensajeIndicadores(objNewCliente);
-                        //Agrego los indicadores a una lista, para tener un historial de indicadores emitidos
-                        mensajesTextArea.add(mensajeTextArea);
-                        //Fijar los mensajes en el area de Indicadores
-                        mostrarIndicadoresEnPantalla();
-                        //Ejecucion de los Objetos Remotos
-                        
-                        BooleanHolder resultado = new BooleanHolder();
-                        ref.registrarPaciente(objNewCliente, resultado);
-                        
-                        ref.enviarIndicadores(objNewCliente, resultado);
-
-                    }
-                });
-                objTimer.start();
-            } else {
-                JOptionPane.showMessageDialog(this, "El número de habitación ya se encuentra registrado...");
-            }
-        } else {
-            //JOptionPane.showMessageDialog(this, "El formulario se encuentra incompleto...");
-        }
-
-
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     public String mensajeIndicadores(PacienteDTO objNewCliente) {
         DecimalFormat df = new DecimalFormat("#.00");
@@ -355,6 +362,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                    ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNac"));
                }else{
                    JOptionPane.showMessageDialog(null, "No se encuenta el paciente.");
+                   limpiarCajas();
                }
                sentencia.close();
                conexionABaseDeDatos.desconectar();
@@ -396,8 +404,38 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarCRUDActionPerformed
 
     private void txtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarActionPerformed
-        // TODO add your handling code here:
+        conexionABaseDeDatos.conectar();
+        int resultado=-1;
+        if(txtNumHabitacion.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Llene el campo Num Habitación para eliminar paciente.");
+        }else if(validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))){
+            try {            
+                PreparedStatement sentencia = null;
+                String consulta = "delete from paciente where idPaciente=?";
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+                sentencia.setString(1, txtId.getText());
+                resultado = sentencia.executeUpdate(); 
+                sentencia.close();
+                conexionABaseDeDatos.desconectar();
+
+            } catch (SQLException e) {
+                      System.out.println("error en la eliminación: "+e.getMessage());         
+            }
+            if (resultado==1) {
+                JOptionPane.showMessageDialog(null, "Paciente eliminado satisfactoriamente.");
+                limpiarCajas();
+            }else{
+                JOptionPane.showMessageDialog(null, "Fallo al eliminar paciente.");
+                limpiarCajas();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al eliminar paciente. El numero de habitacion debe estar entre 100 y 999.");
+        }
     }//GEN-LAST:event_txtEliminarActionPerformed
+
+    private void btnGoLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLecturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGoLecturaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -473,7 +511,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCRUD;
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnGoLectura;
     private javax.swing.JButton btnGuardarCRUD;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificarCRUD;
@@ -483,19 +521,15 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JLabel logocorazon;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextArea txtAreaCallback;
     private javax.swing.JButton txtEliminar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumHabitacion;
-    private javax.swing.JTextArea txtarea_indicadores;
     // End of variables declaration//GEN-END:variables
 
     private void inhabilitarComponentes() {

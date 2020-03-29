@@ -1,6 +1,6 @@
 CREATE TABLE `paciente` (
   `idPaciente` int(11) NOT NULL AUTO_INCREMENT,
-  `numHabitacion` int(22) NOT NULL,
+  `numHabitacion` int(22) UNIQUE NOT NULL ,
   `nombresPaciente` varchar(30),
   `apellidosPaciente` varchar(30),
   `fechaNac` DATE NOT NULL,
