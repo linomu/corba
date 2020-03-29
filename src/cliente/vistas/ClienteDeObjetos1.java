@@ -84,16 +84,22 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         btnModificarCRUD = new javax.swing.JButton();
         jdFecha = new com.toedter.calendar.JDateChooser();
         btnLimpiar = new javax.swing.JButton();
+        txtEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 234, -1, -1));
 
         jLabel2.setText("Apellidos:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 271, -1, -1));
 
         jLabel3.setText("Fecha de nacimiento:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 308, -1, -1));
 
         jLabel4.setText("Num. Habitación:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 188, -1, -1));
 
         txtNombre.setName("txtNombre"); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -101,10 +107,13 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 232, 233, -1));
 
         txtNumHabitacion.setName("txtNumHabitacion"); // NOI18N
+        getContentPane().add(txtNumHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 186, 59, -1));
 
         txtApellido.setName("txtApellido"); // NOI18N
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 269, 233, -1));
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnGuardar.setText("Guardar y enviar indicadores");
@@ -114,17 +123,24 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 122, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 24)); // NOI18N
         jLabel5.setText("Indicadores");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 62, -1, -1));
 
         txtarea_indicadores.setColumns(20);
         txtarea_indicadores.setRows(5);
         txtarea_indicadores.setName("txtIndicadores"); // NOI18N
         jScrollPane1.setViewportView(txtarea_indicadores);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 183, 398, 127));
+
         jLabel6.setFont(new java.awt.Font("Matura MT Script Capitals", 1, 24)); // NOI18N
         jLabel6.setText("Notificaciones");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 322, 214, -1));
+        getContentPane().add(imagenEPS, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 31, 196, 120));
+        getContentPane().add(logocorazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 50, 117, 97));
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSalir.setText("Salir");
@@ -133,12 +149,16 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 12, -1, -1));
 
         txtAreaCallback.setColumns(20);
         txtAreaCallback.setRows(5);
         jScrollPane3.setViewportView(txtAreaCallback);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 361, 375, 116));
+
         txtId.setEnabled(false);
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 186, 56, -1));
 
         btnBuscarCRUD.setText("Buscar");
         btnBuscarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +166,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnBuscarCRUDActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 183, -1, -1));
 
         btnGuardarCRUD.setText("Guardar");
         btnGuardarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +174,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnGuardarCRUDActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 390, -1, -1));
 
         btnModificarCRUD.setText("Modificar");
         btnModificarCRUD.addActionListener(new java.awt.event.ActionListener() {
@@ -160,8 +182,10 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnModificarCRUDActionPerformed(evt);
             }
         });
+        getContentPane().add(btnModificarCRUD, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 390, -1, -1));
 
         jdFecha.setDateFormatString("yyyy-MM-dd");
+        getContentPane().add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 304, 165, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,114 +193,15 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardarCRUD)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarCRUD))
-                            .addComponent(txtApellido)
-                            .addComponent(txtNombre)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(50, 50, 50)
-                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(btnModificarCRUD)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnLimpiar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(117, 117, 117)
-                                .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(24, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(imagenEPS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnGuardar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnSalir)
-                                .addGap(13, 13, 13)
-                                .addComponent(logocorazon, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNumHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarCRUD))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardarCRUD)
-                            .addComponent(btnModificarCRUD)
-                            .addComponent(btnLimpiar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        txtEliminar.setText("Eliminar");
+        txtEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -384,7 +309,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         if (validarFormulario()) {
             try {
                 PreparedStatement sentencia = null;
-                String consulta = "insert into paciente(numHabitacion, nombresPaciente, apellidosPaciente, fechaNacimiento) values(?,?,?,?)";
+                String consulta = "insert into paciente(numHabitacion, nombresPaciente, apellidosPaciente, fechaNac) values(?,?,?,?)";
                 sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
                 sentencia.setString(1, txtNumHabitacion.getText());
                 sentencia.setString(2, txtNombre.getText());
@@ -415,30 +340,64 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         conexionABaseDeDatos.conectar();  
         if (txtNumHabitacion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Llene el campo Num Habitación para realizar la busqueda.");
-        }else{
+        }else if (validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))){
             try {            
                PreparedStatement sentencia = null;
                String consulta = "select * from paciente where numHabitacion=?";
                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
                sentencia.setString(1, txtNumHabitacion.getText());
                ResultSet res = sentencia.executeQuery();
-               while(res.next()){
+               if(res.next()){
+                   txtId.setText(res.getString("idPaciente"));
                    txtNumHabitacion.setText(res.getString("numHabitacion"));
                    txtNombre.setText(res.getString("nombresPaciente"));
                    txtApellido.setText(res.getString("apellidosPaciente"));
-                   ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNacimiento"));
+                   ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNac"));
+               }else{
+                   JOptionPane.showMessageDialog(null, "No se encuenta el paciente.");
                }
                sentencia.close();
                conexionABaseDeDatos.desconectar();
             }catch (SQLException e) {
-                System.out.println("error en la consulta de un empleado: "+e.getMessage());         
+                System.out.println("error en la consulta de un paciente: "+e.getMessage());         
             }   
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al buscar paciente. El num de habitacion debe estar entre 100 y 999.");
         }
     }//GEN-LAST:event_btnBuscarCRUDActionPerformed
 
     private void btnModificarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCRUDActionPerformed
-        // TODO add your handling code here:
+        conexionABaseDeDatos.conectar();
+        int resultado=-1;
+        if (validarFormulario()) {
+            try {
+                PreparedStatement sentencia = null;
+                String consulta = "update paciente set numHabitacion=?, nombresPaciente=?, apellidosPaciente=?, fechaNac=? where idPaciente=?";
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+                sentencia.setString(1, txtNumHabitacion.getText());
+                sentencia.setString(2, txtNombre.getText());
+                sentencia.setString(3, txtApellido.getText());
+                sentencia.setString(4, ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText());
+                sentencia.setString(5, txtId.getText());
+                resultado = sentencia.executeUpdate(); 
+                sentencia.close();
+                conexionABaseDeDatos.desconectar();
+            } catch (SQLException e) {
+                      System.out.println("error en la inserción: "+e.getMessage());         
+            }
+            if (resultado>=1) {
+                JOptionPane.showMessageDialog(null, "Paciente modificado satisfactoriamente.");
+                limpiarCajas();
+            }else{
+                JOptionPane.showMessageDialog(null, "Fallo al modificar paciente.");
+                limpiarCajas();
+            }
+        }
     }//GEN-LAST:event_btnModificarCRUDActionPerformed
+
+    private void txtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -532,6 +491,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     private javax.swing.JLabel logocorazon;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextArea txtAreaCallback;
+    private javax.swing.JButton txtEliminar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumHabitacion;
@@ -559,15 +519,21 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
             formularioCorrecto  = false;
             JOptionPane.showMessageDialog(this, "El formulario se encuentra incompleto.");
         }
-        if (!validarAnio(((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText())) {
+        else if (!validarAnio(((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText())) {
             formularioCorrecto  = false;
-            JOptionPane.showMessageDialog(this, "El anio no puede ser igual o mayor al anio actual");
+            JOptionPane.showMessageDialog(this, "El anio ingresado no puede ser igual o mayor al anio actual");
         }
-        try {
-            int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
-        } catch (NumberFormatException e) { 
-            JOptionPane.showMessageDialog(this, "La habitación debe ser un número entre 100 y 999");
-            formularioCorrecto = false;
+        else if (!validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
+            formularioCorrecto  = false;
+            JOptionPane.showMessageDialog(this, "El num de habitacion debe estar entre 100 y 999.");
+        }
+        else{
+            try {
+                int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
+            } catch (NumberFormatException e) { 
+                JOptionPane.showMessageDialog(this, "La habitación debe ser un número entre 100 y 999");
+                formularioCorrecto = false;
+            }
         }
         return formularioCorrecto;
     }
@@ -601,6 +567,14 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
         int anioActual = Integer.parseInt(fechaActual[0]);
         
         return anioActual>anio;
+    }
+    
+    public boolean validarNumHabitacion(int num){
+        boolean valido = false;
+        if (num >= 100 && num <= 999) {
+            valido = true;
+        }
+        return valido;
     }
     
     public void inhabilidarTextFecha(){
