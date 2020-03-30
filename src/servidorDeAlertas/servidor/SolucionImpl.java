@@ -41,6 +41,8 @@ public class SolucionImpl extends GestionAlertasIntPOA{
     @Override
     public void registrarPaciente(PacienteDTO objPaciente, BooleanHolder resultado) {
         
+        
+        
         if(pacientes.containsKey(objPaciente.numHabitacion)){
             System.out.println("No se puede introducir el paciente. El numero de habitación está repetido.");
             
@@ -112,6 +114,7 @@ public class SolucionImpl extends GestionAlertasIntPOA{
             ClsPersistencia objPersistencia = new ClsPersistencia();
             /*Creo un objeto de la clase ClsIndicadoresRegistros, con el fin de estructurar la alerta y así guardarlo en el txt*/
             ClsIndicadoresRegistros objRegistro = new ClsIndicadoresRegistros(String.valueOf(objPaciente.numHabitacion),objPaciente.nombres,objPaciente.apellidos, fecha, hora, String.valueOf(listaConIndicadores.size()));
+            
             objPersistencia.GuardarRegistro(objRegistro);
 
             objMensajeNotificacion = new ClsMensajeNotificacionDTO(objPaciente.numHabitacion, objPaciente.edad, objPaciente.nombres, objPaciente.apellidos, mensaje, fecha, hora);

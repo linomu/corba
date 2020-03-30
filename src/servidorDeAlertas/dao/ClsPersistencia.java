@@ -12,6 +12,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import ServidorNotificaciones.dto.ClsIndicadoresRegistros;
 import java.util.ArrayList;
+import conexion.ConexionBD;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +24,7 @@ import java.util.ArrayList;
  */
 public class ClsPersistencia {
     
+    private ConexionBD conexionABaseDeDatos;
     private String cwd;
     private String nombreArchivo;
     private File f;
@@ -26,6 +32,7 @@ public class ClsPersistencia {
     public ClsPersistencia() {
         
          this.f = new File("ZColeccionCarros.txt");
+         conexionABaseDeDatos= new ConexionBD();
         /*this.cwd = new File("").getAbsolutePath();
         this.nombreArchivo="historialDeAlertas.txt";
         this.f = new File(this.cwd+"/"+this.nombreArchivo);*/
@@ -33,9 +40,29 @@ public class ClsPersistencia {
     
 
     public void GuardarRegistro(ClsIndicadoresRegistros registro) {
+        conexionABaseDeDatos.conectar();
+        int resultado = -1;
         try {
-            
-            
+            PreparedStatement sentencia = null;
+            String consulta = "insert into registro(numHabitacion, fecha, hora, puntuacion) values(?,?,?,?)";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, registro.getNumHabitacion());
+            sentencia.setString(2, registro.getFecha());
+            sentencia.setString(3, registro.getHora());
+            sentencia.setInt(4, Integer.parseInt(registro.getPuntuacion()));
+            resultado = sentencia.executeUpdate(); 
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+        } catch (SQLException e) {
+                  System.out.println("error en la inserción: "+e.getMessage());         
+        }
+        if (resultado>=1) {
+            JOptionPane.showMessageDialog(null, "Registo guardado satisfactoriamente.");
+        }else{
+            JOptionPane.showMessageDialog(null, "Fallo al guardar registro.");
+        }
+        /*
+        try {    
             FileWriter fw;
             BufferedWriter bw;
             if (f.exists() && f.length() != 0) {
@@ -56,12 +83,11 @@ public class ClsPersistencia {
             fw.close();
         } catch (Exception e) {
             System.out.println(e);
-        }
+        }*/
     }
 
     public ArrayList<ClsIndicadoresRegistros> LeerRegistros(String numHabitacionArg) {
-        
-        
+        /*
         System.out.println("Estoy leyendo el archivo");
         ClsIndicadoresRegistros auxRegistro;
         ArrayList<ClsIndicadoresRegistros> listaRegistros = new ArrayList<>();
@@ -96,7 +122,32 @@ public class ClsPersistencia {
         } catch (Exception e) {
             System.out.println(e);
         }
+        */
+        
+        ArrayList<ClsIndicadoresRegistros> listaRegistros = new ArrayList<>();
+        
+        conexionABaseDeDatos.conectar();        
+        try {            
+            PreparedStatement sentencia = null;
+            String consulta = "select numHabitacion,fecha,hora,puntuacion from registro where numHabitacion = ?";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            ResultSet res = sentencia.executeQuery();
+            while(res.next()){
+            sentencia.setInt(1, Integer.parseInt(numHabitacionArg));
+            ClsIndicadoresRegistros objRegistro = new ClsIndicadoresRegistros();
+            objRegistro.setNumHabitacion(res.getString("numHabitacion"));
+            objRegistro.setFecha(res.getString("fecha"));
+            objRegistro.setHora(res.getString("hora"));
+            objRegistro.setPuntuacion(res.getString("puntuacion"));
+            listaRegistros.add(objRegistro);
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
 
+        } catch (SQLException e) {
+                  System.out.println("error en la selección: "+e.getMessage());         
+        }
+        
         return listaRegistros;
     }
     

@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/cliente/vistas/ClienteDeObjetos1.java</file>
+            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorNotificaciones/sop_corba/GestionNotificacionesPackage/ClsMensajeNotificacionDTO.java</file>
+            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorDeAlertas/servidor/SolucionImpl.java</file>
+            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorNotificaciones/servidor/GestionNotificacionesImpl.java</file>
+            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorDeAlertas/dao/ClsPersistencia.java</file>
         </group>
     </open-files>
 </project-private>
