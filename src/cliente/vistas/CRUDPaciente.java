@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ClienteDeObjetos1 extends javax.swing.JFrame {
+public class CRUDPaciente extends javax.swing.JFrame {
 
     private final ConexionBD conexionABaseDeDatos;
     private static boolean hayPaciente;
@@ -30,7 +30,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     //private ArrayList<String> mensajesTextArea = new ArrayList<>();
     //private ArrayList<Integer> numeroHabitaciones = new ArrayList<>();
 
-    public ClienteDeObjetos1() {
+    public CRUDPaciente() {
         initComponents();
         //llenarTabla();
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -427,7 +427,7 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
     private void btnGoLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLecturaActionPerformed
         if(hayPaciente){
             Paciente paciente = capturarPaciente();
-            ClienteDeObjetos2 lectura = new ClienteDeObjetos2(paciente);
+            ClienteDeObjetos lectura = new ClienteDeObjetos(paciente);
             this.setVisible(false);
             lectura.setVisible(true);
         }else{
@@ -449,21 +449,23 @@ public class ClienteDeObjetos1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClienteDeObjetos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClienteDeObjetos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClienteDeObjetos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClienteDeObjetos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteDeObjetos1().setVisible(true);
+                new CRUDPaciente().setVisible(true);
             }
         });
     }
