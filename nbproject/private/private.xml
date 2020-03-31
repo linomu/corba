@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorNotificaciones/sop_corba/GestionNotificacionesPackage/ClsMensajeNotificacionDTO.java</file>
-            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorDeAlertas/servidor/SolucionImpl.java</file>
-            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorNotificaciones/servidor/GestionNotificacionesImpl.java</file>
-            <file>file:/home/guest/Documentos/University/lsd/Requerimiento%203%20CORBA/corba/src/servidorDeAlertas/dao/ClsPersistencia.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/cliente/vistas/ClienteDeObjetos.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/cliente/vistas/CRUDPaciente.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/servidor/ServidorDeObjetos.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/servidor/GestionNotificacionesImpl.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/dto/ClsIndicadoresAlerta.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/dto/ClsIndicadoresRegistros.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/sop_corba/GestionNotificacionesPackage/ClsMensajeNotificacionDTO.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorDeAlertas/dao/ClsPersistencia.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorDeAlertas/servidor/SolucionImpl.java</file>
+            <file>file:/D:/University/Requerimiento_CORBA_3_corte/Version%20pc%20mesa/corba/src/servidorNotificaciones/vistas/VistaNotificaciones.java</file>
         </group>
     </open-files>
 </project-private>
