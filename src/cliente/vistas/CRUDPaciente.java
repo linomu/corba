@@ -5,7 +5,6 @@ import org.omg.CORBA.*;
 
 import servidorDeAlertas.sop_corba.*;
 
-
 import conexion.ConexionBD;
 import java.awt.Image;
 import java.lang.Object;
@@ -38,7 +37,7 @@ public class CRUDPaciente extends javax.swing.JFrame {
         inhabilidarTextFecha();
         fijarImagenesEnElFormulario();
         txtId.setVisible(false);
-        conexionABaseDeDatos= new ConexionBD();
+        conexionABaseDeDatos = new ConexionBD();
     }
 
     /**
@@ -284,12 +283,12 @@ public class CRUDPaciente extends javax.swing.JFrame {
     public String mensajeIndicadores(PacienteDTO objNewCliente) {
         DecimalFormat df = new DecimalFormat("#.00");
         String mensaje = "Enviando Indicadores...\n"
-                + "Frecuencia Cardiaca: " + df.format(objNewCliente.frecuenciaCardiaca)
-                + "\nPresión Arterial: " + df.format(objNewCliente.sistolica) + "/" + df.format(objNewCliente.diastolica)
-                + "\nFrecuencia Respiratoria: " + df.format(objNewCliente.frecuenciaRespiratoria)
-                + "\nTemperatura: " + df.format(objNewCliente.temperatura)
-                + "\nSaturación de Oxígento: " + df.format(objNewCliente.saturacionOxigeno) + "\n"
-                + "************\n";
+            + "Frecuencia Cardiaca: " + df.format(objNewCliente.frecuenciaCardiaca)
+            + "\nPresión Arterial: " + df.format(objNewCliente.sistolica) + "/" + df.format(objNewCliente.diastolica)
+            + "\nFrecuencia Respiratoria: " + df.format(objNewCliente.frecuenciaRespiratoria)
+            + "\nTemperatura: " + df.format(objNewCliente.temperatura)
+            + "\nSaturación de Oxígento: " + df.format(objNewCliente.saturacionOxigeno) + "\n"
+            + "************\n";
         return mensaje;
     }
 
@@ -299,9 +298,9 @@ public class CRUDPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGuardarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCRUDActionPerformed
-        
+
         conexionABaseDeDatos.conectar();
-        int resultado=-1;
+        int resultado = -1;
         if (validarFormulario()) {
             try {
                 PreparedStatement sentencia = null;
@@ -310,22 +309,22 @@ public class CRUDPaciente extends javax.swing.JFrame {
                 sentencia.setString(1, txtNumHabitacion.getText());
                 sentencia.setString(2, txtNombre.getText());
                 sentencia.setString(3, txtApellido.getText());
-                sentencia.setString(4, ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText());
-                resultado = sentencia.executeUpdate(); 
+                sentencia.setString(4, ((JTextField) jdFecha.getDateEditor().getUiComponent()).getText());
+                resultado = sentencia.executeUpdate();
                 sentencia.close();
                 conexionABaseDeDatos.desconectar();
             } catch (SQLException e) {
-                      System.out.println("error en la inserción: "+e.getMessage());         
+                System.out.println("error en la inserción: " + e.getMessage());
             }
-            if (resultado>=1) {
+            if (resultado >= 1) {
                 JOptionPane.showMessageDialog(null, "Paciente registrado satisfactoriamente.");
                 limpiarCajas();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Fallo al registrar paciente.");
                 limpiarCajas();
             }
         }
-       
+
     }//GEN-LAST:event_btnGuardarCRUDActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -333,41 +332,41 @@ public class CRUDPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnBuscarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCRUDActionPerformed
-        conexionABaseDeDatos.conectar();  
+        conexionABaseDeDatos.conectar();
         if (txtNumHabitacion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Llene el campo Num Habitación para realizar la busqueda.");
-        }else if (validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))){
-            try {            
-               PreparedStatement sentencia = null;
-               String consulta = "select * from paciente where numHabitacion=?";
-               sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
-               sentencia.setString(1, txtNumHabitacion.getText());
-               ResultSet res = sentencia.executeQuery();
-               if(res.next()){
-                   txtId.setText(res.getString("idPaciente"));
-                   txtNumHabitacion.setText(res.getString("numHabitacion"));
-                   txtNombre.setText(res.getString("nombresPaciente"));
-                   txtApellido.setText(res.getString("apellidosPaciente"));
-                   ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNac"));
-                   hayPaciente = true;
-               }else{
-                   JOptionPane.showMessageDialog(null, "No se encuenta el paciente.");
-                   hayPaciente = false;
-                   limpiarCajas();
-               }
-               sentencia.close();
-               conexionABaseDeDatos.desconectar();
-            }catch (SQLException e) {
-                System.out.println("error en la consulta de un paciente: "+e.getMessage());         
-            }   
-        }else{
+        } else if (validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
+            try {
+                PreparedStatement sentencia = null;
+                String consulta = "select * from paciente where numHabitacion=?";
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+                sentencia.setString(1, txtNumHabitacion.getText());
+                ResultSet res = sentencia.executeQuery();
+                if (res.next()) {
+                    txtId.setText(res.getString("idPaciente"));
+                    txtNumHabitacion.setText(res.getString("numHabitacion"));
+                    txtNombre.setText(res.getString("nombresPaciente"));
+                    txtApellido.setText(res.getString("apellidosPaciente"));
+                    ((JTextField) jdFecha.getDateEditor().getUiComponent()).setText(res.getString("fechaNac"));
+                    hayPaciente = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encuenta el paciente.");
+                    hayPaciente = false;
+                    limpiarCajas();
+                }
+                sentencia.close();
+                conexionABaseDeDatos.desconectar();
+            } catch (SQLException e) {
+                System.out.println("error en la consulta de un paciente: " + e.getMessage());
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Error al buscar paciente. El num de habitacion debe estar entre 100 y 999.");
         }
     }//GEN-LAST:event_btnBuscarCRUDActionPerformed
 
     private void btnModificarCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCRUDActionPerformed
         conexionABaseDeDatos.conectar();
-        int resultado=-1;
+        int resultado = -1;
         if (validarFormulario()) {
             try {
                 PreparedStatement sentencia = null;
@@ -376,18 +375,18 @@ public class CRUDPaciente extends javax.swing.JFrame {
                 sentencia.setString(1, txtNumHabitacion.getText());
                 sentencia.setString(2, txtNombre.getText());
                 sentencia.setString(3, txtApellido.getText());
-                sentencia.setString(4, ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText());
+                sentencia.setString(4, ((JTextField) jdFecha.getDateEditor().getUiComponent()).getText());
                 sentencia.setString(5, txtId.getText());
-                resultado = sentencia.executeUpdate(); 
+                resultado = sentencia.executeUpdate();
                 sentencia.close();
                 conexionABaseDeDatos.desconectar();
             } catch (SQLException e) {
-                      System.out.println("error en la inserción: "+e.getMessage());         
+                System.out.println("error en la inserción: " + e.getMessage());
             }
-            if (resultado>=1) {
+            if (resultado >= 1) {
                 JOptionPane.showMessageDialog(null, "Paciente modificado satisfactoriamente.");
                 limpiarCajas();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Fallo al modificar paciente.");
                 limpiarCajas();
             }
@@ -396,41 +395,41 @@ public class CRUDPaciente extends javax.swing.JFrame {
 
     private void txtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEliminarActionPerformed
         conexionABaseDeDatos.conectar();
-        int resultado=-1;
-        if(txtNumHabitacion.getText().equals("")){
+        int resultado = -1;
+        if (txtNumHabitacion.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Llene el campo Num Habitación para eliminar paciente.");
-        }else if(validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))){
-            try {            
+        } else if (validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
+            try {
                 PreparedStatement sentencia = null;
                 String consulta = "delete from paciente where idPaciente=?";
-                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
                 sentencia.setString(1, txtId.getText());
-                resultado = sentencia.executeUpdate(); 
+                resultado = sentencia.executeUpdate();
                 sentencia.close();
                 conexionABaseDeDatos.desconectar();
 
             } catch (SQLException e) {
-                      System.out.println("error en la eliminación: "+e.getMessage());         
+                System.out.println("error en la eliminación: " + e.getMessage());
             }
-            if (resultado==1) {
+            if (resultado == 1) {
                 JOptionPane.showMessageDialog(null, "Paciente eliminado satisfactoriamente.");
                 limpiarCajas();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Fallo al eliminar paciente.");
                 limpiarCajas();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error al eliminar paciente. El numero de habitacion debe estar entre 100 y 999.");
         }
     }//GEN-LAST:event_txtEliminarActionPerformed
 
     private void btnGoLecturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoLecturaActionPerformed
-        if(hayPaciente){
+        if (hayPaciente) {
             Paciente paciente = capturarPaciente();
             ClienteDeObjetos lectura = new ClienteDeObjetos(paciente);
             this.setVisible(false);
             lectura.setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No has seleccionado/buscado un paciente. Por favor busca un paciente para seleccionarlo.");
         }
     }//GEN-LAST:event_btnGoLecturaActionPerformed
@@ -508,92 +507,88 @@ public class CRUDPaciente extends javax.swing.JFrame {
     }
 
     private boolean validarFormulario() {
-        boolean formularioCorrecto=true;
-        if((((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText().isEmpty() || this.txtNombre.getText().equals("") || this.txtApellido.getText().equals(""))){
-            formularioCorrecto  = false;
+        boolean formularioCorrecto = true;
+        if ((((JTextField) this.jdFecha.getDateEditor().getUiComponent()).getText().isEmpty() || this.txtNombre.getText().equals("") || this.txtApellido.getText().equals(""))) {
+            formularioCorrecto = false;
             JOptionPane.showMessageDialog(this, "El formulario se encuentra incompleto.");
-        }
-        else if (!validarAnio(((JTextField)this.jdFecha.getDateEditor().getUiComponent()).getText())) {
-            formularioCorrecto  = false;
+        } else if (!validarAnio(((JTextField) this.jdFecha.getDateEditor().getUiComponent()).getText())) {
+            formularioCorrecto = false;
             JOptionPane.showMessageDialog(this, "El anio ingresado no puede ser igual o mayor al anio actual");
-        }
-        else if (!validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
-            formularioCorrecto  = false;
+        } else if (!validarNumHabitacion(Integer.parseInt(txtNumHabitacion.getText()))) {
+            formularioCorrecto = false;
             JOptionPane.showMessageDialog(this, "El num de habitacion debe estar entre 100 y 999.");
-        }
-        else{
+        } else {
             try {
                 int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
-            } catch (NumberFormatException e) { 
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "La habitación debe ser un número entre 100 y 999");
                 formularioCorrecto = false;
             }
         }
         return formularioCorrecto;
     }
-    
-    public boolean validarAnio(String fecha){
+
+    public boolean validarAnio(String fecha) {
         String[] fechaIngresada = fecha.split("-");
         int anio = Integer.parseInt(fechaIngresada[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
-        LocalDateTime now = LocalDateTime.now();  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
         String[] fechaActual = dtf.format(now).toString().split("-");
         int anioActual = Integer.parseInt(fechaActual[0]);
-        
-        return anioActual>anio;
+
+        return anioActual > anio;
     }
-    
-    public boolean validarNumHabitacion(int num){
+
+    public boolean validarNumHabitacion(int num) {
         boolean valido = false;
         if (num >= 100 && num <= 999) {
             valido = true;
         }
         return valido;
     }
-    
-    public void inhabilidarTextFecha(){
+
+    public void inhabilidarTextFecha() {
         jdFecha.setEnabled(false);
         jdFecha.getCalendarButton().setEnabled(true);
     }
-    
-    public void limpiarCajas(){
+
+    public void limpiarCajas() {
         txtNumHabitacion.setText(null);
         txtNombre.setText(null);
         txtApellido.setText(null);
-        ((JTextField)jdFecha.getDateEditor().getUiComponent()).setText(null);
+        ((JTextField) jdFecha.getDateEditor().getUiComponent()).setText(null);
     }
-    
-    public ArrayList<Paciente> listaPacientes(){
+
+    public ArrayList<Paciente> listaPacientes() {
         ArrayList<Paciente> pacientes = new ArrayList<>();
-        
-        conexionABaseDeDatos.conectar();        
-        try {            
+
+        conexionABaseDeDatos.conectar();
+        try {
             PreparedStatement sentencia = null;
             String consulta = "select * from paciente";
-            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
             ResultSet res = sentencia.executeQuery();
-            DefaultTableModel tm  = (DefaultTableModel)tblPacientes.getModel();
+            DefaultTableModel tm = (DefaultTableModel) tblPacientes.getModel();
             Paciente objPaciente;
             //tm.setRowCount(0);
-            while(res.next()){
+            while (res.next()) {
                 objPaciente = new Paciente(res.getInt("numHabitacion"), res.getString("nombresPaciente"), res.getString("apellidosPaciente"), res.getString("fechaNac"));
                 pacientes.add(objPaciente);
-                
-                
+
             }
             sentencia.close();
             conexionABaseDeDatos.desconectar();
 
         } catch (SQLException e) {
-                  System.out.println("error en la inserción: "+e.getMessage());         
+            System.out.println("error en la inserción: " + e.getMessage());
         }
-        
+
         return pacientes;
     }
-    
-    public void llenarTabla(){
+
+    public void llenarTabla() {
         ArrayList<Paciente> pacientes = listaPacientes();
-        DefaultTableModel model = (DefaultTableModel)tblPacientes.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblPacientes.getModel();
         java.lang.Object[] row = new java.lang.Object[4];
         for (int i = 0; i < pacientes.size(); i++) {
             row[0] = pacientes.get(i).getNumHabitacion();
@@ -603,15 +598,15 @@ public class CRUDPaciente extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
-    
-    public Paciente capturarPaciente(){
+
+    public Paciente capturarPaciente() {
         int numHabitacion = Integer.parseInt(txtNumHabitacion.getText());
         String nombres = txtNombre.getText();
         String apellidos = txtApellido.getText();
-        String fechaNac = ((JTextField)jdFecha.getDateEditor().getUiComponent()).getText();
-        
+        String fechaNac = ((JTextField) jdFecha.getDateEditor().getUiComponent()).getText();
+
         Paciente paciente = new Paciente(numHabitacion, nombres, apellidos, fechaNac);
-        
+
         return paciente;
     }
 }

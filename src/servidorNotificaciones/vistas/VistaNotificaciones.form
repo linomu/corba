@@ -50,7 +50,6 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -60,7 +59,6 @@
                           <Component id="txtFechaAlerta" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtApellidos" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
                           <Component id="txtEdad" min="-2" pref="297" max="-2" attributes="0"/>
-                          <Component id="txtEstrato" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -118,12 +116,7 @@
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFechaAlerta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEstrato" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="117" max="-2" attributes="0"/>
@@ -271,16 +264,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Estrato:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="txtEstrato">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

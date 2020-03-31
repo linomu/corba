@@ -15,6 +15,7 @@ public class ClsIndicadoresAlerta implements Serializable{
     private String nombreIndicador;
     private String valor;
 
+    public ClsIndicadoresAlerta() {}
     public ClsIndicadoresAlerta(String nombreIndicador, String valor) {
         this.nombreIndicador = nombreIndicador;
         this.valor = valor;

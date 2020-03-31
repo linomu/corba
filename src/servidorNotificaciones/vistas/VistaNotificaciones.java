@@ -86,8 +86,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtEdad = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtEstrato = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,10 +158,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Estrato:");
-
-        txtEstrato.setText("...");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,8 +183,7 @@ public class VistaNotificaciones extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addComponent(jLabel5)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNumHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,8 +191,7 @@ public class VistaNotificaciones extends javax.swing.JFrame {
                             .addComponent(txtHoraAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtFechaAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEstrato)))
+                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(btnSalir))
@@ -242,11 +234,7 @@ public class VistaNotificaciones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtFechaAlerta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEstrato))
-                .addGap(10, 10, 10)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +322,7 @@ public class VistaNotificaciones extends javax.swing.JFrame {
         
         //initComponents();
         
-        GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl(this.txtEstrato, this.txtNumHabitacion, this.txtNombres, this.txtApellidos, this.txtEdad, this.txtHoraAlerta, this.txtFechaAlerta, this.txtMensajeEnfermeraDoctor, this.tableIndicadores, this.tableRegistros);
+        GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl(this.txtNumHabitacion, this.txtNombres, this.txtApellidos, this.txtEdad, this.txtHoraAlerta, this.txtFechaAlerta, this.txtMensajeEnfermeraDoctor, this.tableIndicadores, this.tableRegistros);
        //GestionNotificacionesImpl ObjServant = new GestionNotificacionesImpl();   
         
         System.out.println("5. Crea el objeto tie y se registra una referencia al objeto servant mediante el contructor");
@@ -385,7 +373,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -394,7 +381,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
     private javax.swing.JTable tableRegistros;
     private javax.swing.JLabel txtApellidos;
     private javax.swing.JLabel txtEdad;
-    private javax.swing.JLabel txtEstrato;
     private javax.swing.JLabel txtFechaAlerta;
     private javax.swing.JLabel txtHoraAlerta;
     private javax.swing.JLabel txtMensajeEnfermeraDoctor;
@@ -466,13 +452,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
         this.jLabel5 = jLabel5;
     }
 
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
 
     public JLabel getjLabel7() {
         return jLabel7;
@@ -536,14 +515,6 @@ public class VistaNotificaciones extends javax.swing.JFrame {
 
     public void setTxtEdad(JLabel txtEdad) {
         this.txtEdad = txtEdad;
-    }
-
-    public JLabel getTxtEstrato() {
-        return txtEstrato;
-    }
-
-    public void setTxtEstrato(JLabel txtEstrato) {
-        this.txtEstrato = txtEstrato;
     }
 
     public JLabel getTxtFechaAlerta() {

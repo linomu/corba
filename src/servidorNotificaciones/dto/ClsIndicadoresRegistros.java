@@ -6,17 +6,19 @@
 package ServidorNotificaciones.dto;
 
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lino Alejandro Munoz
  */
-public class ClsIndicadoresRegistros implements Serializable{
-    private String numHabitacion, nombre, apellidos,  fecha, hora, puntuacion;
+public class ClsIndicadoresRegistros{
 
-    public ClsIndicadoresRegistros(){
+    private String numHabitacion, nombre, apellidos, fecha, hora, puntuacion;
+    
+    public ClsIndicadoresRegistros() {
     }
-
+    
     public ClsIndicadoresRegistros(String numHabitacion, String nombre, String apellidos, String fecha, String hora, String puntuacion) {
         this.numHabitacion = numHabitacion;
         this.nombre = nombre;
@@ -25,55 +27,58 @@ public class ClsIndicadoresRegistros implements Serializable{
         this.hora = hora;
         this.puntuacion = puntuacion;
     }
-
+    
     public String getNumHabitacion() {
         return numHabitacion;
     }
-
+    
     public void setNumHabitacion(String numHabitacion) {
         this.numHabitacion = numHabitacion;
     }
-
+    
     public String getNombre() {
         return nombre;
     }
-
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public String getApellidos() {
         return apellidos;
     }
-
+    
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-
+    
     public String getFecha() {
         return fecha;
     }
-
+    
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+    
     public String getHora() {
         return hora;
     }
-
+    
     public void setHora(String hora) {
         this.hora = hora;
     }
-
+    
     public String getPuntuacion() {
         return puntuacion;
     }
-
+    
     public void setPuntuacion(String puntuacion) {
         this.puntuacion = puntuacion;
     }
-    
-    
+
+    public void mostrar() {
+        String msg = (this.getNumHabitacion() + " " + this.getFecha() + " " + this.getHora() + "  " + this.getPuntuacion());
+        JOptionPane.showMessageDialog(null, msg);
+    }
     
 }

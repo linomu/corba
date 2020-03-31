@@ -5,6 +5,7 @@
  */
 package ServidorDeAlertas.dao;
 
+import ServidorNotificaciones.dto.ClsIndicadoresAlerta;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,44 +24,43 @@ import javax.swing.JOptionPane;
  * @author Lino Alejandro Munoz
  */
 public class ClsPersistencia {
-    
+
     private ConexionBD conexionABaseDeDatos;
     private String cwd;
     private String nombreArchivo;
     private File f;
 
     public ClsPersistencia() {
-        
-         this.f = new File("ZColeccionCarros.txt");
-         conexionABaseDeDatos= new ConexionBD();
+
+        this.f = new File("ZColeccionCarros.txt");
+        conexionABaseDeDatos = new ConexionBD();
         /*this.cwd = new File("").getAbsolutePath();
         this.nombreArchivo="historialDeAlertas.txt";
         this.f = new File(this.cwd+"/"+this.nombreArchivo);*/
     }
-    
 
     public void GuardarRegistro(ClsIndicadoresRegistros registro) {
         conexionABaseDeDatos.conectar();
         int resultado = -1;
         try {
             PreparedStatement sentencia = null;
-            String consulta = "insert into registro(numHabitacion, fecha, hora, puntuacion) values(?,?,?,?)";
+            String consulta = "insert into registro(idPacienteFK, fecha, hora, puntuacion) values(?,?,?,?)";
             sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
-            sentencia.setString(1, registro.getNumHabitacion());
+            sentencia.setString(1, buscarPaciente(registro.getNumHabitacion()));
             sentencia.setString(2, registro.getFecha());
             sentencia.setString(3, registro.getHora());
             sentencia.setInt(4, Integer.parseInt(registro.getPuntuacion()));
-            resultado = sentencia.executeUpdate(); 
+            resultado = sentencia.executeUpdate();            
             sentencia.close();
             conexionABaseDeDatos.desconectar();
         } catch (SQLException e) {
-                  System.out.println("error en la inserción: "+e.getMessage());         
-        }
-        if (resultado>=1) {
+            System.out.println("error en la inserción: " + e.getMessage());
+        }/*
+        if (resultado >= 1) {
             JOptionPane.showMessageDialog(null, "Registo guardado satisfactoriamente.");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Fallo al guardar registro.");
-        }
+        }*/
         /*
         try {    
             FileWriter fw;
@@ -85,8 +85,35 @@ public class ClsPersistencia {
             System.out.println(e);
         }*/
     }
+    
+    public void GuardarIndicador(ArrayList<ClsIndicadoresAlerta> listaConIndicadores, String numHabitacion) {
+        String idLastRegistro = buscarUltimoRegistro(numHabitacion);
+        conexionABaseDeDatos.conectar();
+        int resultado = -1;
+        PreparedStatement sentencia = null;
+        try {
+            String consulta = "insert into indicadores(idRegistro, nombre, valor) values(?,?,?)";
+                        
+            for (int i = 0; i < listaConIndicadores.size(); i++) {
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+                sentencia.setString(1, idLastRegistro);
+                sentencia.setString(2, listaConIndicadores.get(i).getNombreIndicador());
+                sentencia.setString(3, listaConIndicadores.get(i).getValor());
+                resultado = sentencia.executeUpdate();
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+        } catch (SQLException e) {
+            System.out.println("error en la inserción: " + e.getMessage());
+        }/*
+        if (resultado >= 1) {
+            JOptionPane.showMessageDialog(null, "Registo guardado satisfactoriamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Fallo al guardar registro.");
+        }*/
+    }
 
-    public ArrayList<ClsIndicadoresRegistros> LeerRegistros(String numHabitacionArg) {
+    public ArrayList<ClsIndicadoresRegistros> LeerRegistros(String idPacienteArg) {
         /*
         System.out.println("Estoy leyendo el archivo");
         ClsIndicadoresRegistros auxRegistro;
@@ -122,40 +149,37 @@ public class ClsPersistencia {
         } catch (Exception e) {
             System.out.println(e);
         }
-        */
-        
+         */
+
         ArrayList<ClsIndicadoresRegistros> listaRegistros = new ArrayList<>();
-        
-        conexionABaseDeDatos.conectar();        
-        try {            
+        ClsIndicadoresRegistros auxRegistro = new ClsIndicadoresRegistros();
+        conexionABaseDeDatos.conectar();
+        try {
             PreparedStatement sentencia = null;
-            String consulta = "select numHabitacion,fecha,hora,puntuacion from registro where numHabitacion = ?";
-            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            String consulta = "select idPacienteFK,fecha,hora,puntuacion from registro where idPacienteFK=?";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, idPacienteArg);
             ResultSet res = sentencia.executeQuery();
-            while(res.next()){
-            sentencia.setInt(1, Integer.parseInt(numHabitacionArg));
-            ClsIndicadoresRegistros objRegistro = new ClsIndicadoresRegistros();
-            objRegistro.setNumHabitacion(res.getString("numHabitacion"));
-            objRegistro.setFecha(res.getString("fecha"));
-            objRegistro.setHora(res.getString("hora"));
-            objRegistro.setPuntuacion(res.getString("puntuacion"));
-            listaRegistros.add(objRegistro);
+            while (res.next()) {
+                auxRegistro.setNumHabitacion(res.getString("idPacienteFK"));
+                auxRegistro.setFecha(res.getString("fecha"));
+                auxRegistro.setHora(res.getString("hora"));
+                auxRegistro.setPuntuacion(res.getString("puntuacion"));
+                listaRegistros.add(auxRegistro);
             }
             sentencia.close();
             conexionABaseDeDatos.desconectar();
-
         } catch (SQLException e) {
-                  System.out.println("error en la selección: "+e.getMessage());         
+            System.out.println("error en la consulta de un paciente: " + e.getMessage());
         }
-        
+
         return listaRegistros;
     }
-    
+
     public ArrayList<Integer> LeerNumerosHabitacion() {
         ArrayList<Integer> listaNumerosHabitacion = new ArrayList<>();
 
         try {
-           
 
             if (f.exists()) {
                 FileReader fr = new FileReader(f);
@@ -167,10 +191,10 @@ public class ClsPersistencia {
 
                     String numHabitacion = registro[0];
                     int numeroHabitacion = Integer.parseInt(numHabitacion);
-                   
+
                     //Recupero solo las alertas del paciente en cuestion
                     if (!(listaNumerosHabitacion.contains(numHabitacion))) {
-                         listaNumerosHabitacion.add(numeroHabitacion);
+                        listaNumerosHabitacion.add(numeroHabitacion);
                     }
 
                 }
@@ -183,6 +207,47 @@ public class ClsPersistencia {
         }
 
         return listaNumerosHabitacion;
+    }
+
+    public String buscarPaciente(String numHabitacion) {
+        String idPaciente = "";
+        conexionABaseDeDatos.conectar();
+        try {
+            PreparedStatement sentencia = null;
+            String consulta = "select idPaciente from paciente where numHabitacion=?";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, numHabitacion);
+            ResultSet res = sentencia.executeQuery();
+            if (res.next()) {
+                idPaciente = res.getString("idPaciente");
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+        } catch (SQLException e) {
+            System.out.println("error en la consulta de un paciente: " + e.getMessage());
+        }
+        return idPaciente;
+    }
+
+    public String buscarUltimoRegistro(String numHabitacion) {
+        String id = "";
+        String idPaciente = buscarPaciente(numHabitacion);
+        conexionABaseDeDatos.conectar();
+        try {
+            PreparedStatement sentencia = null;
+            String consulta = "select idRegistro from registro where idRegistro=(select max(idRegistro) from registro) and idPacienteFK=?";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, idPaciente);
+            ResultSet res = sentencia.executeQuery();
+            if (res.next()) {
+                id = res.getString("idRegistro");
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+        } catch (SQLException e) {
+            System.out.println("error en la consulta de un paciente: " + e.getMessage());
+        }
+        return id;
     }
 
 }

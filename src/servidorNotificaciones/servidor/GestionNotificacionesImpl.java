@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package servidorNotificaciones.servidor;
+import ServidorDeAlertas.dao.ClsPersistencia;
 import ServidorNotificaciones.dto.ClsIndicadoresAlerta;
 import ServidorNotificaciones.dto.ClsIndicadoresRegistros;
 import ServidorNotificaciones.dto.ClsNotificacionDTO;
@@ -17,6 +18,10 @@ import javax.swing.table.DefaultTableModel;
 import servidorNotificaciones.sop_corba.GestionNotificacionesPOA;
 import servidorNotificaciones.sop_corba.GestionNotificacionesPackage.ClsMensajeNotificacionDTO;
 import ServidorNotificaciones.vistas.VistaNotificaciones;
+import conexion.ConexionBD;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,14 +31,14 @@ import java.util.ArrayList;
 public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
 
      //ClsNotificacionDTO objNotificacion;
-    JLabel numHabitacion, nombre, apellidos, edad, horaAlerta, fechaAlerta, mensajeDoctorEnfermera, estrato;
+    private final ConexionBD conexionABaseDeDatos1;
+    JLabel numHabitacion, nombre, apellidos, edad, horaAlerta, fechaAlerta, mensajeDoctorEnfermera;
     JTable tablaIndicadores, tablaRegistros;
     DefaultTableModel objModeloTablaIndicadores = new DefaultTableModel();
     DefaultTableModel objModeloTablaRegistros = new DefaultTableModel();
 
     public GestionNotificacionesImpl(VistaNotificaciones Vista){
         super();
-        this.estrato = Vista.getTxtEstrato();
         this.numHabitacion = Vista.getTxtNumHabitacion();
         this.nombre = Vista.getTxtNombres();
         this.apellidos = Vista.getTxtApellidos();
@@ -43,6 +48,7 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
         this.mensajeDoctorEnfermera = Vista.getTxtMensajeEnfermeraDoctor();
         this.tablaIndicadores = Vista.getTableIndicadores();
         this.tablaRegistros = Vista.getTableRegistros();
+        conexionABaseDeDatos1 = new ConexionBD();
         setModelos();
     }
     
@@ -50,9 +56,8 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
     
      /*En el constructor deben ir referenciados todos los elementos que se van a utilizar en la GUI, con el fin de efectuar
     los cambios en ésta clase y que se vean reflejados en el formulario*/
-    public GestionNotificacionesImpl(JLabel estrato,JLabel numHabitacion, JLabel nombre, JLabel apellidos, JLabel edad, JLabel horaAlerta, JLabel fechaAlerta, JLabel mensajeDoctorEnfermera, JTable tablaIndicadores, JTable tablaRegistros) throws RemoteException {
+    public GestionNotificacionesImpl(JLabel numHabitacion, JLabel nombre, JLabel apellidos, JLabel edad, JLabel horaAlerta, JLabel fechaAlerta, JLabel mensajeDoctorEnfermera, JTable tablaIndicadores, JTable tablaRegistros) throws RemoteException {
         super();
-        this.estrato = estrato;
         this.numHabitacion = numHabitacion;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -62,6 +67,7 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
         this.mensajeDoctorEnfermera = mensajeDoctorEnfermera;
         this.tablaIndicadores = tablaIndicadores;
         this.tablaRegistros = tablaRegistros;
+        conexionABaseDeDatos1 = new ConexionBD();
         setModelos();
 
     }
@@ -81,11 +87,53 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
         System.out.println("***Datos Servidor Notificaiones***\nNombre: " + objNotificacion.nombres);
         System.out.println("Cantidad de alertas: " + objNotificacion.getListaIndicadoresAlerta().size());
        
-        ArrayList<ClsIndicadoresAlerta> listaIndicadoresAlerta = null;
+        ClsPersistencia persistencia = new ClsPersistencia();
+        ArrayList<ClsIndicadoresRegistros> listaIndicadoresRegistros = new ArrayList<>();
+        ArrayList<ClsIndicadoresAlerta> listaIndicadoresAlerta =  new ArrayList<>();
+        ClsIndicadoresAlerta indicador = new ClsIndicadoresAlerta();
+        ClsIndicadoresRegistros registro = new ClsIndicadoresRegistros();
+        String idPaciente = persistencia.buscarPaciente(String.valueOf(objNotificacion.numeroHabitacion));
+        conexionABaseDeDatos1.conectar();
+        try {
+            PreparedStatement sentencia = null;
+            String consulta = "select * from registro where idPacienteFK = ? order by idRegistro asc limit 1";
+            sentencia = conexionABaseDeDatos1.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, idPaciente);
+            ResultSet res = sentencia.executeQuery();
+            while (res.next()) {
+                registro.setFecha(res.getString("fecha"));
+                registro.setHora(res.getString("hora"));
+                registro.setPuntuacion(res.getString("puntuacion"));
+                listaIndicadoresRegistros.add(registro);
+            }
+            sentencia.close();
+            conexionABaseDeDatos1.desconectar();
+        } catch (SQLException e) {
+            System.out.println("error en la consulta de una alerta: " + e.getMessage());
+        }
+        
+        //Buscar
+        conexionABaseDeDatos1.conectar();
+        try {
+            PreparedStatement sentencia = null;
+            String consulta = "select nombre, valor from indicadores where idRegistro = (select max(idRegistro) from registro where idPacienteFK = ?)";
+            sentencia = conexionABaseDeDatos1.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, idPaciente);
+            ResultSet res = sentencia.executeQuery();
+            while (res.next()) {
+                indicador.setNombreIndicador(res.getString("nombre"));
+                indicador.setValor(res.getString("valor"));
+                listaIndicadoresAlerta.add(indicador);
+            }
+            sentencia.close();
+            conexionABaseDeDatos1.desconectar();
+        } catch (SQLException e) {
+            System.out.println("error en la consulta de un indicador: " + e.getMessage());
+        }
         //SE haga la consulta a la base de datos y se recuperen
         objNotificacion.setListaIndicadoresAlerta(listaIndicadoresAlerta);
        
-        ArrayList<ClsIndicadoresRegistros> listaIndicadoresRegistros = null;
+        
         //Consulas la bd
         objNotificacion.setListaIndicadoresRegistros(listaIndicadoresRegistros);
         
