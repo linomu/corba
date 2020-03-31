@@ -249,6 +249,8 @@ public class ClienteDeObjetos extends javax.swing.JFrame {
         String apellido = paciente.getApellidos();
         String fechaNac = paciente.getFechaNac();
         int edad = calcularEdad(fechaNac);
+        btnGoGestion.setEnabled(false);
+        btnGuardar.setEnabled(false);
         //ClsPersistencia objPersistencia = new ClsPersistencia();
         //this.numeroHabitaciones = objPersistencia.LeerNumerosHabitacion();
         if (!this.numeroHabitaciones.contains(numHabitacion)) {

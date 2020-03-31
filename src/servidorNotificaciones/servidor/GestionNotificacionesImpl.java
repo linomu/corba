@@ -90,17 +90,18 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
         ClsPersistencia persistencia = new ClsPersistencia();
         ArrayList<ClsIndicadoresRegistros> listaIndicadoresRegistros = new ArrayList<>();
         ArrayList<ClsIndicadoresAlerta> listaIndicadoresAlerta =  new ArrayList<>();
-        ClsIndicadoresAlerta indicador = new ClsIndicadoresAlerta();
-        ClsIndicadoresRegistros registro = new ClsIndicadoresRegistros();
+        
+        
         String idPaciente = persistencia.buscarPaciente(String.valueOf(objNotificacion.numeroHabitacion));
         conexionABaseDeDatos1.conectar();
         try {
             PreparedStatement sentencia = null;
-            String consulta = "select * from registro where idPacienteFK = ? order by idRegistro asc limit 1";
+            String consulta = "select * from registro where idPacienteFK = ? order by idRegistro desc limit 5";
             sentencia = conexionABaseDeDatos1.getConnection().prepareStatement(consulta);
             sentencia.setString(1, idPaciente);
             ResultSet res = sentencia.executeQuery();
             while (res.next()) {
+                ClsIndicadoresRegistros registro = new ClsIndicadoresRegistros();
                 registro.setFecha(res.getString("fecha"));
                 registro.setHora(res.getString("hora"));
                 registro.setPuntuacion(res.getString("puntuacion"));
@@ -121,6 +122,7 @@ public class GestionNotificacionesImpl extends GestionNotificacionesPOA {
             sentencia.setString(1, idPaciente);
             ResultSet res = sentencia.executeQuery();
             while (res.next()) {
+                ClsIndicadoresAlerta indicador = new ClsIndicadoresAlerta();
                 indicador.setNombreIndicador(res.getString("nombre"));
                 indicador.setValor(res.getString("valor"));
                 listaIndicadoresAlerta.add(indicador);
